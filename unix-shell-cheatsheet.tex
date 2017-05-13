@@ -105,15 +105,15 @@
 \sectiontitle{Working with Text}
 The following commands can take text from standard-input (STDIN), instead of <file>:\\
 
-\command{\textbf{cat}  \emph{<file>}}				{}
-\command{\textbf{head} \emph{<file>}}				{}
-\command{\textbf{tail} \emph{<file>}}				{}
-\command{\textbf{less} \emph{<file>}}				{}
+\command{\textbf{cat}  \emph{<file>}}				{show content of file}
+\command{\textbf{head} \emph{<file>}}				{show first lines}
+\command{\textbf{tail} \emph{<file>}}				{show last lines}
+\command{\textbf{less} \emph{<file>}}				{pager (press q to quit)}
 \command{\textbf{grep} \emph{<keyw> <file>}}		{filter lines with \emph{<keyw>}}
 \command{\textbf{sort} \emph{<file>}}				{sort lines}
 \command{\textbf{uniq} \emph{<file>}}				{remove duplicates}
 \command{\textbf{sed}  \emph{'s/foo/bar/g' <file>}}	{replace \emph{foo} with \emph{bar}}
-\command{\textbf{awk} }	{}
+% \command{\textbf{awk} }	{}
 
 
 %----------------------------------------------------------------------------------------
@@ -186,9 +186,12 @@ The following commands can take text from standard-input (STDIN), instead of <fi
 \command{\textbf{/}}						{directory separator, e.g. \emph{/home/jsmith}}
 \command{\emph{/home/jsmith/data}}			{absolute path starts with /}
 \command{\emph{../project} or \emph{./data}}{relative paths}
-\command{\textbf{*}}						{wildcard (any file)}
-\command{\textbf{*.txt}}					{any file ending in .txt}
-\command{\textbf{data*}}					{any file starting with data}
+
+\sectiontitle{Wildcards}
+
+\command{\textbf{*}}						{all file}
+\command{\textbf{*.txt}}					{all file ending in .txt}
+\command{\textbf{data*}}					{all file starting with data}
 
 %----------------------------------------------------------------------------------------
 %	HEADING: Getting Help
@@ -198,9 +201,9 @@ The following commands can take text from standard-input (STDIN), instead of <fi
 
 \command{\emph{command} -h}				{most commands show a help page}
 \command{\emph{command} --help}			{most commands show a help page}
-\command{man \emph{command}}				{show manual page for command; navigate like less}
-\command{man -k  \emph{keyword}}			{list man pages containing \emph{keyword}}
-\command{apropos \emph{keyword}}			{list man pages containing \emph{keyword}}
+\command{man \emph{command}}			{show manual page for command; navigate like less}
+\command{man -k  \emph{keyword}}		{list man pages containing \emph{keyword}}
+\command{apropos \emph{keyword}}		{list man pages containing \emph{keyword}}
 
 \vspace{\baselineskip} % Whitespace before the next section
 
@@ -223,7 +226,6 @@ The following commands can take text from standard-input (STDIN), instead of <fi
 
 \footnotesize{
 Created by Oliver Stueker, 2017\\ 
-
 Released under the MIT license.
 }
 
