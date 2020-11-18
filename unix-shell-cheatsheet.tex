@@ -46,7 +46,9 @@
 
 \renewcommand{\dots}{\ \dotfill{}\ } % Fills in the right amount of dots
 \newcommand{\command}[2]{\texttt{#1}~\dotfill{}~#2\\} % Custom command for adding a shorcut
-\newcommand{\sectiontitle}[1]{\paragraph{#1} \ \\} % Custom command for subsection titles
+\newcommand{\sectiontitle}[1]{\paragraph{#1} \ \vspace{0.2cm} \\} % Custom command for subsection titles
+\newcommand{\sectiontitleB}[2]{\paragraph{#1} \ \\ ~#2 \vspace{0.2cm} \\} % Custom command for subsection titles
+%\titlespacing*{\sectiontitle}{0pt}{}{4.3ex plus .2ex}
 
 %----------------------------------------------------------------------------------------
 
@@ -76,7 +78,6 @@
 %----------------------------------------------------------------------------------------
 
 \sectiontitle{Navigating Directories}
-
 \command{\textbf{ls}}							{\emph{list} content of current directory}
 \command{\textbf{ls -a}}						{\emph{list} all (incl. hidden)}
 \command{\textbf{ls -A}}						{\emph{list} Almost all (except . and ..)}
@@ -93,8 +94,7 @@
 %	HEADING: Working with Files
 %----------------------------------------------------------------------------------------				
 			
-\sectiontitle{Working with Files}
-
+\sectiontitle{Working with Files}\vspace{0.2cm}
 \command{\textbf{cp} \emph{<from>  <to>}}	{\emph{copy} file\\
 \null\hfill <from> can be several files (wildcard)\\
 \null\hfill <to> can be a filename or directory}
@@ -102,9 +102,8 @@
 \null\hfill <from> can be several files (wildcard)}
 \command{\textbf{find} \emph{<dir>} -name \emph{name}}	{find files in <dir>}
 
-\sectiontitle{Working with Text}
-The following commands can take text from standard-input (STDIN), instead of <file>:\\
-
+\sectiontitleB{Working with Text}
+{The following commands can take text from standard-input (STDIN), instead of <file>:}
 \command{\textbf{cat}  \emph{<file>}}				{show content of file}
 \command{\textbf{head} \emph{<file>}}				{show first lines}
 \command{\textbf{tail} \emph{<file>}}				{show last lines}
@@ -114,6 +113,13 @@ The following commands can take text from standard-input (STDIN), instead of <fi
 \command{\textbf{uniq} \emph{<file>}}				{remove duplicates}
 \command{\textbf{sed}  \emph{'s/foo/bar/g' <file>}}	{replace \emph{foo} with \emph{bar}}
 % \command{\textbf{awk} }	{}
+
+%----------------------------------------------------------------------------------------
+%	HEADING: Convert Line Endings in files
+%----------------------------------------------------------------------------------------	
+\sectiontitle{Convert Line Endings in files}
+\command{\textbf{dos2unix} \emph{<file>}}		{convert from Win to Unix}
+\command{\textbf{unix2dos} \emph{<file>}}		{convert from Unix to Win}
 
 
 %----------------------------------------------------------------------------------------
@@ -129,18 +135,9 @@ The following commands can take text from standard-input (STDIN), instead of <fi
 \begin{minipage}[t]{85mm} % Create a box to house text
 
 %----------------------------------------------------------------------------------------
-%	HEADING: Convert Line Endings in files
-%----------------------------------------------------------------------------------------	
-\sectiontitle{Convert Line Endings in files}
-
-\command{\textbf{dos2unix} \emph{<file>}}		{convert from Win to Unix}
-\command{\textbf{unix2dos} \emph{<file>}}		{convert from Unix to Win}
-
-%----------------------------------------------------------------------------------------
 %	HEADING: Redirecting Input / Output
 %----------------------------------------------------------------------------------------	
 \sectiontitle{Redirecting Input / Output}
-
 \command{\emph{cmd} > \emph{file}}				{redirect output of \emph{cmd} into \emph{file}\\
 												\null\hfill this overwrites \emph{file}}
 \command{\emph{cmd} >{}> \emph{file}}			{append output of \emph{cmd} to \emph{file}}
@@ -152,16 +149,36 @@ The following commands can take text from standard-input (STDIN), instead of <fi
 %	HEADING: SSH Secure Shell
 %----------------------------------------------------------------------------------------	
 \sectiontitle{SSH Secure Shell}
-
 \command{\textbf{ssh} \emph{jsmith@hostname.example.com\\}}			{connect to remote host as user jsmith}
-
 \command{\textbf{scp} \emph{<file> jsmith@host.example.com:data/\\}}	{copy \emph{file} from here to ~/data/ on remote host}
-
 \command{\textbf{scp} \emph{jsmith@host.example.com:data/file ./\\}}	{copy \emph{~/data/file} from remote host to here}
-
 \command{\textbf{sftp} \emph{jsmith@hostname.example.com\\}}			{}
 
 % \command{\textbf{rsync -av }}	{}
+
+%----------------------------------------------------------------------------------------
+%	HEADING: line-editing
+%----------------------------------------------------------------------------------------	
+\sectiontitle{Line editing}
+\command{Ctrl + a  \emph{or} [Home]}		{go to start of line}
+\command{Ctrl + e  \emph{or} [End]}			{go to end of line}
+\command{Ctrl + k}							{\emph{kill} line to end}
+\command{Ctrl + u}							{kill line to start}
+\command{Ctrl + w}							{delete word backwards}
+\command{Ctrl + y}							{\emph{yank} deleted text}
+
+%----------------------------------------------------------------------------------------
+%	HEADING: history
+%----------------------------------------------------------------------------------------	
+\sectiontitle{Working with history}
+\command{$\uparrow$}						{flip backwards in history}
+\command{$\downarrow$}						{flip forward in history}
+\command{Alt + <}							{jump to first entry in history}
+\command{Alt + Shift + >}					{jump to prompt (end of hist.)}
+\command{Ctrl + r}							{search backwards in history}
+\command{Ctrl + g}							{abort history search}
+% <command>  !!           run previous command prefixed with <command>
+
 
 %----------------------------------------------------------------------------------------
 
@@ -179,7 +196,6 @@ The following commands can take text from standard-input (STDIN), instead of <fi
 %----------------------------------------------------------------------------------------	
 
 \sectiontitle{Special Characters}
-
 \command{\textbf{.}}						{current directory}
 \command{\textbf{..}}						{parent directory}
 \command{\textbf{$\sim$}}					{short for the home directory}
@@ -188,7 +204,6 @@ The following commands can take text from standard-input (STDIN), instead of <fi
 \command{\emph{../project} or \emph{./data}}{relative paths}
 
 \sectiontitle{Wildcards}
-
 \command{\textbf{*}}						{all files}
 \command{\textbf{*.txt}}					{all files ending in .txt}
 \command{\textbf{data*}}					{all files starting with data}
@@ -198,7 +213,6 @@ The following commands can take text from standard-input (STDIN), instead of <fi
 %----------------------------------------------------------------------------------------	
 
 \sectiontitle{Getting Help}
-
 \command{\emph{command} -h}				{most commands show a help page}
 \command{\emph{command} --help}			{most commands show a help page}
 \command{man \emph{command}}			{show manual page for command; navigate like less}
@@ -212,7 +226,6 @@ The following commands can take text from standard-input (STDIN), instead of <fi
 %----------------------------------------------------------------------------------------
 
 \sectiontitle{Links and information}
-
 % \url{http://tmuxcheatsheet.com/} \\
 % \url{https://leanpub.com/the-tao-of-tmux/read}
 
@@ -225,7 +238,7 @@ The following commands can take text from standard-input (STDIN), instead of <fi
 {\color{mygray}\line(1,0){30}} % Print the line with a custom color
 
 \footnotesize{
-Created by Oliver Stueker, 2017\\ 
+Created by Oliver Stueker, 2017-2020\\ 
 Released under the MIT license.
 }
 
