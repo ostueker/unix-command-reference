@@ -213,11 +213,12 @@
 %----------------------------------------------------------------------------------------	
 
 \sectiontitle{Getting Help}
-\command{\emph{command} -h}				{most commands show a help page}
-\command{\emph{command} --help}			{most commands show a help page}
-\command{man \emph{command}}			{show manual page for command; navigate like less}
-\command{man -k  \emph{keyword}}		{list man pages containing \emph{keyword}}
-\command{apropos \emph{keyword}}		{list man pages containing \emph{keyword}}
+\command{\emph{command} -h}				{most commands show a help}
+\command{\emph{command} -{}-help}	{most commands show a help}
+\command{man \emph{command}}			{show manual page for command\\
+												\null\hfill navigate like less}
+\command{man -k  \emph{keyword}}		{list man pages with \emph{keyword}}
+\command{apropos \emph{keyword}}		{list man pages with \emph{keyword}}
 
 \vspace{\baselineskip} % Whitespace before the next section
 
@@ -238,8 +239,9 @@
 {\color{mygray}\line(1,0){30}} % Print the line with a custom color
 
 \footnotesize{
-Created by Oliver Stueker, 2017-2020\\ 
-Released under the MIT license.
+Created by Oliver Stueker, 2017-2021\\ 
+Released under the MIT license.\\
+\url{https://github.com/ostueker/unix-command-reference}
 }
 
 %----------------------------------------------------------------------------------------
