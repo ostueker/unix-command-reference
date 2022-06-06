@@ -31,10 +31,10 @@
 \usepackage{url} % Required for the \url command to easily display URLs
 
 \usepackage[ % This block contains information used to annotate the PDF
-	colorlinks=true, 
-	pdftitle={Unix Shell Cheatsheet}, 
-	pdfauthor={Oliver Stueker}, 
-	pdfsubject={Compilation of useful commands on the Unix/Linux Terminal}, 
+	colorlinks=true,
+	pdftitle={Unix Shell Cheatsheet},
+	pdfauthor={Oliver Stueker},
+	pdfsubject={Compilation of useful commands on the Unix/Linux Terminal},
 	pdfkeywords={Unix, Linux, Terminal, bash, shell, Cheatsheet}
 ]{hyperref}
 
@@ -50,6 +50,22 @@
 \newcommand{\sectiontitleB}[2]{\paragraph{#1} \ \\ ~#2 \vspace{0.2cm} \\} % Custom command for subsection titles
 %\titlespacing*{\sectiontitle}{0pt}{}{4.3ex plus .2ex}
 
+% Define \key command based on https://tex.stackexchange.com/a/5227
+\usepackage{tikz}
+\usetikzlibrary{shadows}
+\newcommand*\key[1]{%
+  \tikz[baseline=(key.base)]
+    \node[%
+      draw,
+      fill=white,
+      drop shadow={shadow xshift=0.25ex,shadow yshift=-0.25ex,fill=black,opacity=0.75},
+      rectangle,
+      rounded corners=2pt,
+      inner sep=1pt,
+      line width=0.5pt,
+      font=\scriptsize\sffamily
+    ](key){\hspace*{2pt}#1\hspace*{2pt}\strut};}
+
 %----------------------------------------------------------------------------------------
 
 \begin{document}
@@ -57,7 +73,7 @@
 \begin{picture}(279,215) % Create a container for the page content
 
 %----------------------------------------------------------------------------------------
-%	TITLE SECTION 
+%	TITLE SECTION
 %----------------------------------------------------------------------------------------
 
 \put(5,210){ % Position on the page to put the title
@@ -92,8 +108,8 @@
 
 %----------------------------------------------------------------------------------------
 %	HEADING: Working with Files
-%----------------------------------------------------------------------------------------				
-			
+%----------------------------------------------------------------------------------------
+
 \sectiontitle{Working with Files}\vspace{0.2cm}
 \command{\textbf{cp} \emph{<from>  <to>}}	{\emph{copy} file\\
 \null\hfill <from> can be several files (wildcard)\\
@@ -116,7 +132,7 @@
 
 %----------------------------------------------------------------------------------------
 %	HEADING: Convert Line Endings in files
-%----------------------------------------------------------------------------------------	
+%----------------------------------------------------------------------------------------
 \sectiontitle{Convert Line Endings in files}
 \command{\textbf{dos2unix} \emph{<file>}}		{convert from Win to Unix}
 \command{\textbf{unix2dos} \emph{<file>}}		{convert from Unix to Win}
@@ -128,7 +144,7 @@
 } % End the first division of the page
 
 %----------------------------------------------------------------------------------------
-%	SECOND COLUMN SPECIFICATION 
+%	SECOND COLUMN SPECIFICATION
 %----------------------------------------------------------------------------------------
 
 \put(96,195){ % Divide the page
@@ -136,49 +152,49 @@
 
 %----------------------------------------------------------------------------------------
 %	HEADING: Redirecting Input / Output
-%----------------------------------------------------------------------------------------	
+%----------------------------------------------------------------------------------------
 \sectiontitle{Redirecting Input / Output}
 \command{\emph{cmd} > \emph{file}}				{redirect output of \emph{cmd} into \emph{file}\\
 												\null\hfill this overwrites \emph{file}}
 \command{\emph{cmd} >{}> \emph{file}}			{append output of \emph{cmd} to \emph{file}}
 \command{\emph{cmd} < \emph{file}}				{\emph{cmd} read input from \emph{file}}
 \command{\emph{cmd1} | \emph{cmd2}}				{\emph{pipe}: the output of \emph{cmd1}\\
-												\null\hfill becomes the input for \emph{cmd2}}
+															\null\hfill becomes the input for \emph{cmd2}}
+\command{\emph{cmd} <{}<{}< "input line 1"}		{"\emph{here-string}":}
+													\null\hfill read string as if read from a file with one line\\
+\command{\emph{cmd} <{}< \emph{END}}			{"\emph{here-document}":}
+input line 1									\null\hfill read next input-lines until \texttt{END} \\
+input line 2									\null\hfill as if lines were read from a file; \\
+\texttt{END}									\null\hfill \emph{END} can be any word e.g. \emph{EOF}\\
 
-%----------------------------------------------------------------------------------------
-%	HEADING: SSH Secure Shell
-%----------------------------------------------------------------------------------------	
-\sectiontitle{SSH Secure Shell}
-\command{\textbf{ssh} \emph{jsmith@hostname.example.com\\}}			{connect to remote host as user jsmith}
-\command{\textbf{scp} \emph{<file> jsmith@host.example.com:data/\\}}	{copy \emph{file} from here to ~/data/ on remote host}
-\command{\textbf{scp} \emph{jsmith@host.example.com:data/file ./\\}}	{copy \emph{~/data/file} from remote host to here}
-\command{\textbf{sftp} \emph{jsmith@hostname.example.com\\}}			{}
-
-% \command{\textbf{rsync -av }}	{}
 
 %----------------------------------------------------------------------------------------
 %	HEADING: line-editing
-%----------------------------------------------------------------------------------------	
+%----------------------------------------------------------------------------------------
 \sectiontitle{Line editing}
-\command{Ctrl + a  \emph{or} [Home]}		{go to start of line}
-\command{Ctrl + e  \emph{or} [End]}			{go to end of line}
-\command{Ctrl + k}							{\emph{kill} line to end}
-\command{Ctrl + u}							{kill line to start}
-\command{Ctrl + w}							{delete word backwards}
-\command{Ctrl + y}							{\emph{yank} deleted text}
+\command{\key{Ctrl} + a  \emph{or} \key{Home}}	{go to start of line}
+\command{\key{Ctrl} + e  \emph{or} \key{End}}		{go to end of line}
+\command{\key{Ctrl} + k}							{\emph{kill}/clear line to end}
+\command{\key{Ctrl} + u}							{\emph{kill}/clear line to start}
+\command{\key{Ctrl} + w}							{delete word backwards}
+\command{\key{Ctrl} + y}							{\emph{yank} deleted text}
+
 
 %----------------------------------------------------------------------------------------
 %	HEADING: history
-%----------------------------------------------------------------------------------------	
+%----------------------------------------------------------------------------------------
 \sectiontitle{Working with history}
-\command{$\uparrow$}							{flip backwards in history}
-\command{$\downarrow$}						{flip forward in history}
-\command{Alt + <}									{jump to first entry in history}
-\command{Alt + Shift + >}					{jump to prompt (end of hist.)}
-\command{Ctrl + r}								{search backwards in history; \\
-											\null\hfill use again to repeat search}
-\command{Ctrl + g}								{abort history search}
-% <command>  !!           run previous command prefixed with <command>
+\command{$\uparrow$}												{flip backwards in history}
+\command{$\downarrow$}											{flip forward in history}
+\command{\key{Alt} + <}											{jump to first entry in history}
+\command{\key{Alt} + \key{Shift} + >}				{jump to prompt (end of hist.)}
+\command{\key{Alt} + r}											{search backwards in history; \\
+																\null\hfill use again to repeat search}
+\command{\key{Ctrl} + g}										{abort history search}
+\command{\textbf{history}}									{print all commands in history}
+\command{\textbf{history} 10}								{print last 10 commands}
+\command{!\emph{100}}												{run command with id \emph{100} from history}
+\command{\emph{cmd} !{}!}										{run last command prefixed with cmd}
 
 
 %----------------------------------------------------------------------------------------
@@ -187,14 +203,14 @@
 } % End the second division of the page
 
 %----------------------------------------------------------------------------------------
-%	THIRD COLUMN SPECIFICATION 
+%	THIRD COLUMN SPECIFICATION
 %----------------------------------------------------------------------------------------
 
 \put(190,195){ % Divide the page
 \begin{minipage}[t]{85mm} % Create a box to house tex
 %----------------------------------------------------------------------------------------
 %	HEADING: Special Characters
-%----------------------------------------------------------------------------------------	
+%----------------------------------------------------------------------------------------
 
 \sectiontitle{Special Characters}
 \command{\textbf{.}}						{current directory}
@@ -205,13 +221,26 @@
 \command{\emph{../project} or \emph{./data}}{relative paths}
 
 \sectiontitle{Wildcards}
-\command{\textbf{*}}						{all files}
+\command{\textbf{*}}							{all files}
 \command{\textbf{*.txt}}					{all files ending in .txt}
 \command{\textbf{data*}}					{all files starting with data}
+											\null\hfill \texttt{?} matches any single character\\
+											\null\hfill \texttt{*} matches zero or more characters\\
+
+%----------------------------------------------------------------------------------------
+%	HEADING: SSH Secure Shell
+%----------------------------------------------------------------------------------------
+\sectiontitle{SSH Secure Shell}
+\command{\textbf{ssh} \emph{jsmith@hostname.example.com\\}}			{connect to remote host as user jsmith}
+\command{\textbf{scp} \emph{<file> jsmith@host.example.com:data/\\}}	{copy \emph{file} from here to ~/data/ on remote host}
+\command{\textbf{scp} \emph{jsmith@host.example.com:data/file ./\\}}	{copy \emph{~/data/file} from remote host to here}
+\command{\textbf{sftp} \emph{jsmith@hostname.example.com\\}}			{}
+
+% \command{\textbf{rsync -av }}	{}
 
 %----------------------------------------------------------------------------------------
 %	HEADING: Getting Help
-%----------------------------------------------------------------------------------------	
+%----------------------------------------------------------------------------------------
 
 \sectiontitle{Getting Help}
 \command{\emph{command} -h}				{most commands show a help}
@@ -227,7 +256,7 @@
 %	LINKS AND INFORMATION
 %----------------------------------------------------------------------------------------
 
-\sectiontitle{Links and information}
+%\sectiontitle{Links and information}
 % \url{http://tmuxcheatsheet.com/} \\
 % \url{https://leanpub.com/the-tao-of-tmux/read}
 
@@ -240,7 +269,7 @@
 {\color{mygray}\line(1,0){30}} % Print the line with a custom color
 
 \footnotesize{
-Created by Oliver Stueker, 2017-2021\\ 
+Created by Oliver Stueker, 2017--2022\\
 Released under the MIT license.\\
 \url{https://github.com/ostueker/unix-command-reference}
 }
